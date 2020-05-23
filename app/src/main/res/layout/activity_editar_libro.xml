@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dee4ee"
+    tools:context=".VIEW.EditarLibro"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lb_titulo_registrarVehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar Vehiculo"
+            android:textSize="20sp"
+
+            android:textColor="#000000"
+            android:background="@color/fondo_inicio"
+            android:padding="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            />
+        <TextView
+            android:id="@+id/lb_datos_vehi_form_regis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="6dp"
+            android:text="Informacion del Vehiculo"
+            android:textColor="@color/letra_negra"
+            android:textSize="18sp" />
+
+        <!-- contanier blanco -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/letra_blanca"
+            >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_matricula_registrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="8dp"
+                android:padding="1dp"
+                android:hint=" # Matricula(obligatorio)"
+                app:errorTextAppearance="@style/EditTextError"
+                app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ct_matricula_registrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" # Matricula(obligatorio)"
+                    android:textColorHint="@color/letra_negra"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/letra_negra"
+                    android:theme="@style/EditText"
+                    android:drawableLeft="@drawable/car"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--  layout marca -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Marca: "
+                    android:textSize="16sp"
+                    android:textColor="@color/letra_negra"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    />
+                <!--<Spinner
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#44c7f4"
+                    android:textColor="@color/letra_negra"
+                    android:id="@+id/spn_marcaVehiculo_registrar"
+                    android:entries="@array/array_marcaVehiculo"
+                    >
+                </Spinner>-->
+            </LinearLayout>
+            <!-- fin layout marca -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_newMarca_registrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="8dp"
+                android:padding="1dp"
+                android:hint=" Marca"
+                app:errorTextAppearance="@style/EditTextError"
+                app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ct_newMarca_registrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Marca"
+                    android:textColorHint="@color/letra_negra"
+                    android:inputType="textPersonName|textCapSentences|textAutoCorrect|textAutoComplete"
+                    android:textColor="@color/letra_negra"
+                    android:theme="@style/EditText"
+                    android:drawableLeft="@drawable/car"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--  layout color -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Color: "
+                    android:textSize="16sp"
+                    android:textColor="@color/letra_negra"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    />
+                <!--<Spinner
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#44c7f4"
+                    android:textColor="@color/letra_negra"
+                    android:entries="@array/array_colorVehiculo"
+                    android:id="@+id/spn_colorVehiculo_registrar"
+                    >
+                </Spinner>-->
+            </LinearLayout>
+            <!-- fin layout color-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_toneladasVehiculo_registrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="1dp"
+                android:hint="Toneladas Soportadas"
+                app:errorTextAppearance="@style/EditTextError"
+                app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ct_toneladasVehiculo_registrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Toneladas Soportadas"
+                    android:inputType="number"
+                    android:textColorHint="@color/letra_negra"
+                    android:textColor="@color/letra_negra"
+                    android:theme="@style/EditText"
+                    android:drawableLeft="@drawable/car"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/letra_negra"
+                android:text="Seleccione el tipo de carga soportada/admitida por su vehiculo"
+                android:textSize="16sp"
+                />
+            <!--  layout tipo de carga -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de carga: "
+                    android:textSize="16sp"
+                    android:textColor="@color/letra_negra"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    />
+                <!--<Spinner
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#44c7f4"
+                    android:textColor="@color/letra_negra"
+                    android:entries="@array/array_tipoCargaVehiculo"
+                    android:id="@+id/spn_tipoCargaVehiculo_registrar"
+                    >
+                </Spinner> -->
+            </LinearLayout>
+            <!-- fin layout tipo de carga -->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_descripVehiculo_registrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="1dp"
+                android:hint="Descripcion del vehiculo"
+                app:errorTextAppearance="@style/EditTextError"
+                app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ct_descripVehiculo_registrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descripcion del vehiculo"
+                    android:textColorHint="@color/letra_negra"
+                    android:textColor="@color/letra_negra"
+                    android:theme="@style/EditText"
+                    android:drawableLeft="@drawable/car"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="4dp"
+                android:text="Informacion adicional"
+                android:textColor="@color/letra_negra"
+                android:textSize="15sp" />
+
+            <!-- layout container form fotos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                >
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+
+                    <!--layout subir foto 1-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Foto 1 (opcional)"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/letra_negra"
+                            android:textSize="13sp" />
+                        <ImageButton
+                            android:id="@+id/imbt_selecFoto1RegiVehiculo"
+                            android:onClick="onClick"
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#26ef69"
+                            android:src="@drawable/imbt_avatar_editarperfiluser"
+                            />
+                        <TextView
+                            android:id="@+id/lb_message_foto1_RegiVehiculo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Imagen no seleccionada"
+
+                            android:textColor="@color/letra_negra"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                    <!-- fin layout subir foto 1-->
+
+                </LinearLayout>
+
+                <!-- divisor de contenedores  -->
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <!--layout subir foto 2-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Foto 2 (opcional)"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/letra_negra"
+                            android:textSize="13sp" />
+                        <ImageButton
+                            android:id="@+id/imbt_selecFoto2RegiVehiculo"
+                            android:onClick="onClick"
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#26ef69"
+                            android:src="@drawable/imbt_avatar_editarperfiluser"
+                            />
+                        <TextView
+                            android:id="@+id/lb_message_foto2_RegiVehiculo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Imagen no seleccionada"
+
+                            android:textColor="@color/letra_negra"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                    <!-- fin layout subir foto 2-->
+                </LinearLayout>
+
+            </LinearLayout>
+            <!-- fin layout container form fotos -->
+
+
+            <!-- layout tipo vehiculo -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de Vehiculo:"
+                    android:textSize="16sp"
+                    android:textColor="@color/letra_negra"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    />
+               <!-- <Spinner
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#44c7f4"
+                    android:textColor="@color/letra_negra"
+                    android:entries="@array/array_tipoVehiculo"
+                    android:id="@+id/spn_tipo_vehiculo_registrar"
+                    >
+                </Spinner>-->
+            </LinearLayout>
+            <!-- finlayout tipo vehiculo -->
+
+            <!-- layout estado vehiculo -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="Estado del Vehiculo:"
+                    android:textSize="16sp"
+                    android:textColor="@color/letra_negra"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    />
+               <!-- <Spinner
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#44c7f4"
+                    android:textColor="@color/letra_negra"
+                    android:entries="@array/array_estadoVehiculo"
+                    android:id="@+id/spn_estado_vehiculo_registrar"
+                    >
+                </Spinner> -->
+            </LinearLayout>
+            <!-- finlayout estado vehiculo -->
+
+
+        </LinearLayout> <!-- fin container blanco  -->
+
+
+        <Button
+            android:id="@+id/bt_registrarVehiculo_form"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/fondo_inicio"
+            android:textColor="@color/letra_negra"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Registrar Vehiculo"
+
+            /><!-- android:drawableRight="@drawable/ic_action_addauto -->
+
+    </LinearLayout>
+
+</ScrollView>
+

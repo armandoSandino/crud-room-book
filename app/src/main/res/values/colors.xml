@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <!--   mis estilos  de  colores -->
+    <color name="letra_verdesita">#7ac143</color>
+    <color name="letra_negra">#000000</color>
+    <color name="letra_blanca">#ffffffff </color>
+    <color name="letra_azul">#0079c1</color>
+
+
+    <color name="fondo_inicio"> #2dde98</color>
+    <color name="fondo_inicio_cabecera"> #0079c1 </color>
+    <color name="fondo_envios"> #7ac143 </color>
+    <color name="fondo_cuenta"> #c1d82f </color>
+</resources>

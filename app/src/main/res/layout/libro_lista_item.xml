@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginBottom="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#eae8d4"
+        android:layout_marginHorizontal="2dp"
+        >
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:background="#fcffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:id="@+id/imvAvatarItemlistarLibroFrag"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/libro520px" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/lbNombreItemListarLibroFrag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Manual de Vue"
+                    android:textSize="19dp"
+                    android:textColor="@color/letra_negra"
+                    />
+                <TextView
+                    android:id="@+id/lbDescripcionItemListarLibroFrag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="@color/letra_negra"
+                    android:text="Vue el marco reactivo más popular de los tiempos."
+                    />
+
+                <TextView
+                    android:id="@+id/lbIsbnItemListarLibroFrag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="@color/letra_negra"
+                    android:text="ISBN: LEON"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:textColor="@color/letra_negra"
+                        android:text="Publicado: "
+                        />
+                    <TextView
+                        android:id="@+id/lbFechaItemListarLibroFrag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_gravity="right"
+                        android:textColor="@color/letra_negra"
+                        android:text="09/10/2022"
+                        />
+                </LinearLayout>
+
+                <!-- contenedor de iconos -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="3"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <ImageView
+                            android:id="@+id/imv_mensaje_itemlistarpublicFrag"
+                            android:layout_width="34dp"
+                            android:layout_height="30dp"
+                            android:src="@android:drawable/ic_menu_share"
+                            android:layout_weight="1"
+                            />
+                        <ImageView
+                            android:id="@+id/imv_call_itemlistarpublicFrag"
+                            android:layout_width="34dp"
+                            android:layout_height="30dp"
+                            android:src="@android:drawable/ic_menu_share"
+                            android:layout_weight="1"
+                            />
+                        <ImageView
+                            android:id="@+id/imv_popup_itemlistarpublicFrag"
+                            android:layout_width="34dp"
+                            android:layout_height="30dp"
+                            android:src="@android:drawable/ic_menu_share"
+                            android:layout_weight="1"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout> <!-- fin contenedor de iconos -->
+
+            </LinearLayout>
+
+        </LinearLayout> <!-- end container cardView -->
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
+

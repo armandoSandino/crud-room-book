@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dee4ee"
+    tools:context=".VIEW.EditarLibro"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar libro"
+            android:textSize="20sp"
+
+            android:textColor="#000000"
+            android:background="@color/fondo_inicio"
+            android:padding="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="6dp"
+            android:text="Información del libro"
+            android:textColor="@color/letra_negra"
+            android:textSize="18sp" />
+
+    <!-- contanier blanco -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/letra_blanca"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/entradaNombreRegistrarLibro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="8dp"
+            android:padding="1dp"
+            android:hint=" Nombre del libro "
+            app:errorTextAppearance="@style/EditTextError"
+            app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ctNombreRegistrarLibro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=" Nombre del libro "
+                android:textColorHint="@color/letra_negra"
+                android:inputType="textPersonName"
+                android:textColor="@color/letra_negra"
+                android:theme="@style/EditText"
+                android:drawableLeft="@drawable/icon_book24px"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/entradaIsbnRegistrarLibro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="8dp"
+            android:padding="1dp"
+            android:hint=" ISBN del libro"
+            app:errorTextAppearance="@style/EditTextError"
+            app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ctIsbnRegistrarLibro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=" ISBN del libro"
+                android:textColorHint="@color/letra_negra"
+                android:inputType="textPersonName"
+                android:textColor="@color/letra_negra"
+                android:theme="@style/EditText"
+                android:drawableLeft="@drawable/icon_book24px"
+                />
+            <!-- android:drawableLeft="@drawable/car" -->
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/entradaDescripcionRegistrarLibro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="8dp"
+            android:padding="1dp"
+            android:hint=" Ingrese la descripción"
+            app:errorTextAppearance="@style/EditTextError"
+            app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ctDescripcionRegistrarLibro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=" Ingrese la descripción"
+                android:textColorHint="@color/letra_negra"
+                android:inputType="textPersonName"
+                android:textColor="@color/letra_negra"
+                android:theme="@style/EditText"
+                android:drawableLeft="@drawable/icon_book24px"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout><!-- fin contenedor blanco  -->
+
+        <Button
+            android:id="@+id/bt_registrarLibroForm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/fondo_inicio"
+            android:textColor="@color/letra_negra"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Registrar libro"
+
+            /><!-- android:drawableRight="@drawable/ic_action_addauto -->
+
+    </LinearLayout>
+
+    </ScrollView>
