@@ -103,13 +103,15 @@ public class FragmentoBuscar extends Fragment {
             public void onClick(View v) {
                 imageButton.setEnabled( false );
                 if( validarDato() ){
-                    lista = db.obtenerLibroDAO().buscarLibro(
+                    Libro libro  = db.obtenerLibroDAO().buscarLibro(
                             ctTerminoBuscarLibro.getText().toString().trim(),
                             ctTerminoBuscarLibro.getText().toString().trim()
                     );
-                    if ( lista.size() == 0 )
+                    lista.add( libro );
+                    if ( lista.size() == 0 || libro == null )
                         onCreateDialogMensaje(123, "libro no encontrado ").show();
-                    agregarDatoReclicador( lista );
+                    else agregarDatoReclicador( lista );
+
                 }else{
                     onCreateDialogMensaje( 420 ,"\n" +
                             "Vuelva a intentarlo más tarde\n.").show();

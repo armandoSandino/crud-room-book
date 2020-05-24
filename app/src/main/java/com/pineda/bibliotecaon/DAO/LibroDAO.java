@@ -26,7 +26,7 @@ public interface LibroDAO {
     public List<Libro> listaLibro();
 
     @Query("SELECT * FROM Libro WHERE Nombre ==:nombre OR Isbn==:isbn")
-    public ArrayList<Libro> buscarLibro( String nombre, String isbn );
+    public Libro buscarLibro( String nombre, String isbn );
 
     @Query("SELECT * FROM Libro WHERE IdLibro ==:idLibro")
     public Libro obtenerLibro( long idLibro );
