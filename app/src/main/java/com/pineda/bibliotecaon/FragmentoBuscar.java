@@ -110,6 +110,7 @@ public class FragmentoBuscar extends Fragment {
                     if ( libro == null )
                         onCreateDialogMensaje(123, "libro no encontrado ").show();
                     else {
+                        onCreateDialogMensaje(1234, "libro encontrado").show();
                         lista = new ArrayList<>();
                         lista.add( libro );
                         agregarDatoReclicador( lista );
