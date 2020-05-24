@@ -5,15 +5,19 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class RegistrarLibroViewModel extends ViewModel {
-
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String> lbSubtituloRegistrarLibro;
+    private  MutableLiveData<String>lbTituloRegistrarLibro;
 
     public RegistrarLibroViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        lbSubtituloRegistrarLibro = new MutableLiveData<>();
+        lbSubtituloRegistrarLibro.setValue("Información del libro");
+        lbTituloRegistrarLibro = new MutableLiveData<>();
+        lbTituloRegistrarLibro.setValue("Registrar libro");
     }
-
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getlbSubtituloRegistrarLibro() {
+        return lbSubtituloRegistrarLibro;
+    }
+    public LiveData<String> getlbTituloRegistrarLibro() {
+        return lbTituloRegistrarLibro;
     }
 }

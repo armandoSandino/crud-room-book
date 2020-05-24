@@ -1,11 +1,12 @@
 package com.pineda.bibliotecaon.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,14 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.pineda.bibliotecaon.ADAPTER.ContactsAdapter;
+
 import com.pineda.bibliotecaon.ADAPTER.LibroRecyclerViewAdapter;
 import com.pineda.bibliotecaon.DB.AppDatabase;
-import com.pineda.bibliotecaon.DB.ContactAppDatabase;
+
 import com.pineda.bibliotecaon.ETC.Util;
 import com.pineda.bibliotecaon.Entity.Libro;
-import com.pineda.bibliotecaon.MainActivity;
+
 import com.pineda.bibliotecaon.R;
+import com.pineda.bibliotecaon.VIEW.EditarLibro;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment {
 
     private LibroRecyclerViewAdapter adaptador;
     private ArrayList<Libro> lista = new ArrayList<>();
+    RecyclerView.LayoutManager mLayoutManager;
 
     @BindView(R.id.recyListaLibroHomeFrag)
      RecyclerView recyclerView;
@@ -57,7 +60,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 //textView.setText(s);
-
             }
         });
 
@@ -67,14 +69,7 @@ public class HomeFragment extends Fragment {
                 build();
         //obtiene y establece una lista de contactos
         lista.addAll( db.obtenerLibroDAO().listaLibro() );
-
-        adaptador = new LibroRecyclerViewAdapter(  getContext() , lista, HomeFragment.this  );
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager( getContext() );
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter( adaptador );
-        //nototificamos los cambios al reciclador
-        adaptador.notifyDataSetChanged();
+        agregarDatoReclicador();
         if ( lista.size() <= 0 )
             lbMessageListaLibroHomeFrag.setVisibility(View.VISIBLE);
         else
@@ -83,7 +78,25 @@ public class HomeFragment extends Fragment {
         return vista;
     }
 
-    public void onItemClick(final boolean b,final Libro contact, final int position) {
-        Toast.makeText( getContext() , "mensaje bien ", Toast.LENGTH_SHORT).show();
+    public void onItemClick( boolean b, Libro libro,  int position) {
+                            Intent intent = new Intent(  getContext() , EditarLibro.class);
+                            intent.putExtra("idLibro",String.valueOf(libro.getId() ) );
+                            intent.putExtra("idUsuario", 1 );
+                            //intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity( intent );
+                            lista.removeAll( lista );
+                            lista.clear();
+
+                            lista.addAll( db.obtenerLibroDAO().listaLibro() );
+                            agregarDatoReclicador();
+    }
+    private  void agregarDatoReclicador() {
+        adaptador = new LibroRecyclerViewAdapter(  getContext() , lista, HomeFragment.this  );
+        mLayoutManager = new LinearLayoutManager( getContext() );
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter( adaptador );
+        //nototificamos los cambios al reciclador
+        adaptador.notifyDataSetChanged();
     }
 }

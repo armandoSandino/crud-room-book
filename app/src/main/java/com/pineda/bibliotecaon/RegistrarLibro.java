@@ -82,6 +82,11 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
             TextInputLayout entradaDescripcionRegistrarLibro;
     @BindView(R.id.ctDescripcionRegistrarLibro)
             TextInputEditText ctDescripcionRegistrarLibro;
+    @BindView(R.id.lbSubtituloRegistrarLibro)
+            TextView lbSubtituloRegistrarLibro;
+    @BindView(R.id.lbTituloRegistrarLibro)
+            TextView lbTituloRegistrarLibro;
+
     AppDatabase db;
 
     public RegistrarLibro() {
@@ -98,12 +103,17 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
         registrarLibroViewModel =
                 ViewModelProviders.of(this).get(RegistrarLibroViewModel.class);
         View vista = inflater.inflate(R.layout.fragment_registrar_libro, container, false);
-        //final TextView textView = root.findViewById(R.id.text_home);
         ButterKnife.bind(this, vista );
-        registrarLibroViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        registrarLibroViewModel.getlbSubtituloRegistrarLibro().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String s) {
-               // textView.setText(s);
+            public void onChanged(String s) {
+                lbSubtituloRegistrarLibro.setText( s );
+            }
+        });
+        registrarLibroViewModel.getlbTituloRegistrarLibro().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                lbTituloRegistrarLibro.setText( s );
             }
         });
         db = Room.
@@ -117,25 +127,11 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
                 Snackbar.make( v , "La información es correcta?", Snackbar.LENGTH_LONG).setAction("SI", new View.OnClickListener() {
                     @Override
                     public void onClick(View vis) {
-                        /*key_auto = String.valueOf(3);
-                            matricula = "MEME";
-                            Intent intent = new Intent( RegistrarVehiculo.this , RegistrarVehiculoSiguienteMap.class );
-                            intent.putExtra("key_auto", key_auto );
-                            intent.putExtra("matricula",matricula );
-                            //intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity( intent );*/
                         bt_registrarLibroForm.setEnabled( false );
                         if( validarDato() ){
                             Date c = (Date) Calendar.getInstance().getTime();
-                            System.out.println("Current time => " + c);
-
-                            SimpleDateFormat df = null;
-                            String formattedDate = "";
-
-                                df = new SimpleDateFormat("dd-MM-yyyy");
-                                formattedDate = df.format(c);
-                            onCreateDialogMensaje(420, "Libro agregado correctamente."+ formattedDate).
-                                    show();
+                            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                            String  formattedDate = df.format(c);
                             Libro libro = new Libro( 0,
                                     ctNombreRegistrarLibro.getText().toString().trim(),
                                     ctIsbnRegistrarLibro.getText().toString().trim(),
@@ -143,6 +139,7 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
                                     formattedDate );
                             long res = db.obtenerLibroDAO().agregarLibro( libro );
                             if ( res > 0 ){
+                                limpiarCajas();
                                 onCreateDialogMensaje(420, "Libro agregado correctamente.").
                                         show();
                             } else {
@@ -168,7 +165,6 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
     public void onClick(View v) {
 
     }
-    //insertar
     //validamos la informacion
     private boolean validarDato () {
         if( ctNombreRegistrarLibro.getText().toString().trim().isEmpty() ){
@@ -214,9 +210,9 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String val=null;
                 if (ctIsbnRegistrarLibro.getText().toString().trim().isEmpty() == true  ) {
-                    setMessageTextInputLayoutError( entradaNombreRegistrarLibro ,"Introduce el ISBN del libro");
+                    setMessageTextInputLayoutError( entradaIsbnRegistrarLibro ,"Introduce el ISBN del libro");
                 } else {
-                    setMessageTextInputLayoutError( entradaNombreRegistrarLibro ,val );
+                    setMessageTextInputLayoutError( entradaIsbnRegistrarLibro ,val );
                 }
             }
             @Override
@@ -259,13 +255,13 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
     protected Dialog onCreateDialogMensaje(int code, String contenido ) {
         Dialog dialogBuilder = null;
         AlertDialog.Builder builder = new AlertDialog.Builder( getContext()  );
-        //builder = builder.setTitle("Cargando.com");
+        //builder = builder.setTitle("Biblioteca");
         builder = builder.setIcon(R.drawable.libro520px);
         //error de conexion
         if(code == 0){
             builder = builder.setTitle("No tienes conexion a internet");
             builder = builder.setMessage(contenido);
-        }else if(code == -1 ){// matricula existente
+        }else if(code == -1 ){// mensaje de error
             builder = builder.setMessage(contenido);
         }else{ // mensaje de notificacion
             builder = builder.setTitle("Notificación ");
@@ -280,5 +276,13 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
         dialogBuilder = builder.create();
         return dialogBuilder;
     }
-
+    //limpiar cajas
+    private void limpiarCajas() {
+        ctNombreRegistrarLibro.setText("");
+        ctIsbnRegistrarLibro.setText("");
+        ctDescripcionRegistrarLibro.setText("");
+        setMessageTextInputLayoutError( entradaNombreRegistrarLibro, null );
+        setMessageTextInputLayoutError( entradaIsbnRegistrarLibro, null );
+        setMessageTextInputLayoutError( entradaDescripcionRegistrarLibro, null );
+    }
 }
