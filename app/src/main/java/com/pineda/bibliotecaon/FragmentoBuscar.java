@@ -107,10 +107,13 @@ public class FragmentoBuscar extends Fragment {
                             ctTerminoBuscarLibro.getText().toString().trim(),
                             ctTerminoBuscarLibro.getText().toString().trim()
                     );
-                    lista.add( libro );
-                    if ( lista.size() == 0 || libro == null )
+                    if ( libro == null )
                         onCreateDialogMensaje(123, "libro no encontrado ").show();
-                    else agregarDatoReclicador( lista );
+                    else {
+                        lista = new ArrayList<>();
+                        lista.add( libro );
+                        agregarDatoReclicador( lista );
+                    }
 
                 }else{
                     onCreateDialogMensaje( 420 ,"\n" +
