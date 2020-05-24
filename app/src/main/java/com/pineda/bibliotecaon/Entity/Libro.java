@@ -69,17 +69,17 @@ public class Libro {
     public void setId(long id) {
         this.id = id;
     }
-    @NonNull
+
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public void setDescripcion(@NonNull String descripcion) {
         this.descripcion = descripcion;
     }
-    @NonNull
+
     public String getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
     public void setFecha(@NonNull String fecha) {
