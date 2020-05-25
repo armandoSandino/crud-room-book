@@ -3,6 +3,7 @@ package com.pineda.bibliotecaon;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import com.pineda.bibliotecaon.ADAPTER.LibroRecyclerViewAdapter;
 import com.pineda.bibliotecaon.DB.AppDatabase;
 import com.pineda.bibliotecaon.ETC.Util;
 import com.pineda.bibliotecaon.Entity.Libro;
+import com.pineda.bibliotecaon.VIEW.EditarLibro;
 import com.pineda.bibliotecaon.ViewModel.BuscarLibroViewModel;
 
 import java.text.SimpleDateFormat;
@@ -102,25 +104,7 @@ public class FragmentoBuscar extends Fragment {
             @Override
             public void onClick(View v) {
                 imageButton.setEnabled( false );
-                if( validarDato() ){
-                    Libro libro  = db.obtenerLibroDAO().buscarLibro(
-                            ctTerminoBuscarLibro.getText().toString().trim(),
-                            ctTerminoBuscarLibro.getText().toString().trim()
-                    );
-                    if ( libro == null )
-                        onCreateDialogMensaje(123, "libro no encontrado ").show();
-                    else {
-                        onCreateDialogMensaje(1234, "libro encontrado").show();
-                        lista = new ArrayList<>();
-                        lista.add( libro );
-                        agregarDatoReclicador( lista );
-                    }
-
-                }else{
-                    onCreateDialogMensaje( 420 ,"\n" +
-                            "Vuelva a intentarlo más tarde\n.").show();
-                    Snackbar.make( v ,"Verifique la información proporcionada ", Snackbar.LENGTH_LONG).show();
-                }
+                buscarLibro( v );
                 imageButton.setEnabled(true);
             }
         });
@@ -128,16 +112,7 @@ public class FragmentoBuscar extends Fragment {
        return vista;
     }
     public void onItemClick( boolean b, Libro libro,  int position) {
-        /*Intent intent = new Intent(  getContext() , EditarLibro.class);
-        intent.putExtra("idLibro",String.valueOf(libro.getId() ) );
-        intent.putExtra("idUsuario", 1 );
-        //intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity( intent );
-        lista.removeAll( lista );
-        lista.clear();
-
-        lista.addAll( db.obtenerLibroDAO().listaLibro() );
-        agregarDatoReclicador();*/
+        accionLibro( libro, position );
     }
     private  void agregarDatoReclicador( ArrayList<Libro> listaResultado ) {
         adaptador = new LibroRecyclerViewAdapter(  getContext() , listaResultado ,
@@ -214,4 +189,66 @@ public class FragmentoBuscar extends Fragment {
         return dialogBuilder;
     }
 
+    //metodo para tomar decisiones con la foto tomada
+    private void accionLibro( Libro libro, int position ){
+        final CharSequence opciones[] = {"Editar","Eliminar","Cancelar"} ;
+        final AlertDialog.Builder dialogoOpcion =  new AlertDialog.Builder( getContext() );
+        dialogoOpcion.setTitle("Seleccione!");
+        dialogoOpcion.setCancelable( false );
+        dialogoOpcion.setItems( opciones , new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int indice) {
+                if(opciones[indice].equals("Editar")){
+                    Intent intent = new Intent(  getContext() , EditarLibro.class);
+                    intent.putExtra("idLibro",String.valueOf(libro.getId() ) );
+                    intent.putExtra("idUsuario", 1 );
+                    startActivity( intent );
+                    refrescarListaResultado();
+                }else if( opciones[indice].equals("Eliminar") ) {
+                    if ( db.obtenerLibroDAO().eliminarLibro( libro ) > 0 ){
+                        onCreateDialogMensaje(235,"libro borrado").show();
+                        refrescarListaResultado();
+                    }
+                    else
+                            onCreateDialogMensaje(-1,"libro no borrado...").show();
+                } else {
+                  dialog.dismiss();
+                }
+            }
+        });
+        dialogoOpcion.show();
+    }
+   void  refrescarListaResultado() {
+       Libro libro  = db.obtenerLibroDAO().buscarLibro(
+               ctTerminoBuscarLibro.getText().toString().trim(),
+               ctTerminoBuscarLibro.getText().toString().trim()
+       );
+       lista = new ArrayList<>();
+
+       if ( libro != null )
+       lista.add( libro );
+
+       agregarDatoReclicador( lista );
+    }
+    private void buscarLibro( View v ) {
+        if( validarDato() ){
+            Libro libro  = db.obtenerLibroDAO().buscarLibro(
+                    ctTerminoBuscarLibro.getText().toString().trim(),
+                    ctTerminoBuscarLibro.getText().toString().trim()
+            );
+            if ( libro == null )
+                onCreateDialogMensaje(123, "libro no encontrado ").show();
+            else {
+                onCreateDialogMensaje(1234, "libro encontrado").show();
+                lista = new ArrayList<>();
+                lista.add( libro );
+                agregarDatoReclicador( lista );
+            }
+
+        }else{
+            onCreateDialogMensaje( 420 ,"\n" +
+                    "Vuelva a intentarlo más tarde\n.").show();
+            Snackbar.make( v ,"Verifique la información proporcionada ", Snackbar.LENGTH_LONG).show();
+        }
+    }
 }

@@ -95,6 +95,7 @@
                 </LinearLayout>
 
                 <!-- contenedor de iconos -->
+                <!--
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,7 +130,8 @@
                             />
 
                     </LinearLayout>
-                </LinearLayout> <!-- fin contenedor de iconos -->
+                </LinearLayout> -->
+                <!-- fin contenedor de iconos -->
 
             </LinearLayout>
 

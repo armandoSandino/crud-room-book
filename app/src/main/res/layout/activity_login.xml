@@ -1,9 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:paddingLeft="44dp"
+    android:paddingRight="44dp"
+    android:background="@color/letra_blanca"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="150dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_login"
+            android:onClick="onClick"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_book"
+            android:layout_margin="7dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/entradaUsuarioLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:padding="1dp"
+            android:hint="Correo electronico"
+            app:errorTextAppearance="@style/EditTextError"
+            app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ctUsuarioLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_action_emailblack"
+                android:hint="Correo electronico"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/letra_negra"
+                android:theme="@style/EditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/entradaPasswordLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:padding="1dp"
+            android:hint="Contraseña"
+            app:passwordToggleEnabled="true"
+            app:errorTextAppearance="@style/EditTextError"
+            app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ctPasswordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Contraseña"
+                android:textColor="@color/letra_negra"
+                android:theme="@style/EditText"
+                android:drawableLeft="@drawable/ic_action_passblack"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btAccederLogin"
+            android:layout_marginTop="20dp"
+            style="@style/estilo_boton_iniciar"
+            android:text="Acceder"
+            />
+        <!--
+        <Button
+            android:id="@+id/bt_registrarme_login"
+            style="@style/estilo_boton_iniciar"
+            android:text="Registrarme"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_animado"
+            >
+            <CheckBox
+                android:id="@+id/chRecordarCredenciales"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Recordar credenciales"
+                android:textColor="@color/letra_negra"
+                android:buttonTint="@color/letra_negra"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:onClick="onClick"
+            android:id="@+id/lb_messageLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:textColor="@color/letra_negra"
+            android:text="Cambiar contraseña, has Click aqui !"
+            android:textSize="16sp"
+            />
+
+        <Spinner
+            android:id="@+id/sp_serverPeti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="#d0d2d3"
+            android:textColor="#000000"
+            android:entries="@array/arrayServerSolic"
+            >
+        </Spinner> -->
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>

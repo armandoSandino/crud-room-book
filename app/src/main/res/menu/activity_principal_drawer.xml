@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -16,8 +17,27 @@
             android:id="@+id/navBuscarLibro"
             android:icon="@android:drawable/ic_menu_search"
             android:title="@string/menu_buscar_libro" />
+        <item
+            android:id="@+id/navcambiarContrasena"
+            android:icon="@drawable/ic_action_passblack"
+            android:title="Cambiar contraseña"
+            >
+        </item>
 
         <item
+            android:id="@+id/navAcerca"
+            android:onClick="mostrarAcerca"
+            android:title="Acerca de"
+            />
+
+        <item
+            android:id="@+id/navCerrarSesion"
+            android:onClick="mostrarAcerca"
+            android:title="Cerrar sesion"
+            />
+
+
+        <!--<item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_gallery" />
@@ -28,6 +48,6 @@
         <item
             android:id="@+id/sarahFragment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_sarah" />
+            android:title="@string/menu_sarah" /> -->
     </group>
 </menu>

@@ -27,4 +27,10 @@ public interface UsuarioDAO {
 
     @Query("SELECT * FROM Usuario WHERE IdUsuario ==:id")
     public Usuario obtenerUsuario( long id );
+
+    @Query("SELECT * FROM Usuario WHERE Correo ==:correo")
+    public Usuario verificarCuenta(String correo );
+
+    @Query("SELECT * FROM Usuario WHERE Correo==:correo AND Contrasena==:contrasena")
+    public Usuario iniciarSesion(String correo, String contrasena );
 }

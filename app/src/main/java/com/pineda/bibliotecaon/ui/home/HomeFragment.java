@@ -84,9 +84,9 @@ public class HomeFragment extends Fragment {
                             intent.putExtra("idUsuario", 1 );
                             //intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity( intent );
+
                             lista.removeAll( lista );
                             lista.clear();
-
                             lista.addAll( db.obtenerLibroDAO().listaLibro() );
                             agregarDatoReclicador();
     }

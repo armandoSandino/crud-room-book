@@ -45,11 +45,15 @@
     <style name="EditTextCounterOverFlow" parent="TextAppearance.Design.Counter.Overflow">
         <item name="android:textColor">#FF7043</item>
     </style>
-    <!-- estilo spinner tipo mapa  -->
-    <style name="AppTheme.SpinnerTipoMapa" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/letra_negra</item>
+
+
+    <style name="estilo_boton_iniciar">
+        <item name="android:background">@drawable/boton_estilo_iniciar</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:textColor">#ffff</item>
         <item name="android:textSize">15sp</item>
     </style>
-
 
 </resources>

@@ -93,7 +93,6 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -160,6 +159,10 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
         bindListenerCajas();
 
         return vista;
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
     @Override
     public void onClick(View v) {

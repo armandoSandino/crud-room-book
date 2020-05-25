@@ -13,7 +13,7 @@
 
     </fragment>
 
-
+<!--
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.pineda.bibliotecaon.ui.gallery.GalleryFragment"
@@ -29,7 +29,7 @@
         android:id="@+id/sarahFragment"
         android:name="com.pineda.bibliotecaon.SarahFragment"
         android:label="fragment_sarah"
-        tools:layout="@layout/fragment_sarah" />
+        tools:layout="@layout/fragment_sarah" />-->
     <fragment
         android:id="@+id/navRegistrarLibro"
         android:name="com.pineda.bibliotecaon.RegistrarLibro"
@@ -40,4 +40,9 @@
         android:name="com.pineda.bibliotecaon.FragmentoBuscar"
         android:label="Buscar libro"
         tools:layout="@layout/fragment_fragmento_buscar" />
+    <fragment
+        android:id="@+id/navcambiarContrasena"
+        android:name="com.pineda.bibliotecaon.CambiarContrasena"
+        android:label="Cambiar contraseña"
+        tools:layout="@layout/fragment_cambiar_contrasena" />
 </navigation>

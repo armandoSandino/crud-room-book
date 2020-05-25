@@ -15,7 +15,11 @@
             android:theme="@style/Theme.AppCompat.Light"
             >
         </activity>
-        <activity android:name=".Login" />
+        <activity
+            android:name=".Principal"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <!--
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -25,7 +29,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         -->
         <activity
-            android:name=".Principal"
+            android:name=".Login"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
