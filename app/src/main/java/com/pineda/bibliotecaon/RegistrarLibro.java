@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.room.Room;
 
 import android.text.Editable;
@@ -141,6 +142,7 @@ public class RegistrarLibro extends Fragment implements  View.OnClickListener{
                                 limpiarCajas();
                                 onCreateDialogMensaje(420, "Libro agregado correctamente.").
                                         show();
+                                Navigation.findNavController( v ).navigate(R.id.nav_home);
                             } else {
                                 onCreateDialogMensaje(420 , "Algo no salió bien inténtelo nuevamente.")
                                         .show();

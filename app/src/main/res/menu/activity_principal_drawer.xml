@@ -23,12 +23,12 @@
             android:title="Cambiar contraseña"
             >
         </item>
-
+<!--
         <item
             android:id="@+id/navAcerca"
             android:onClick="mostrarAcerca"
             android:title="Acerca de"
-            />
+            /> -->
 
         <item
             android:id="@+id/navCerrarSesion"

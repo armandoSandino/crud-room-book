@@ -1,14 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CambiarContrasena">
+    android:background="#dee4ee"
+    tools:context=".CambiarContrasena"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/lbTituloRegistrarLibro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Titulo"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:background="@color/fondo_inicio"
+            android:padding="10dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center_horizontal" />
+        <TextView
+            android:id="@+id/lbSubtituloRegistrarLibro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="6dp"
+            android:text="Subtitulo"
+            android:textColor="@color/letra_negra"
+            android:textSize="18sp" />
 
-</FrameLayout>
+        <!-- contanier blanco -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/letra_blanca"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/entradaContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="8dp"
+                android:padding="1dp"
+                android:hint=" Ingresar contraseña"
+                app:errorTextAppearance="@style/EditTextError"
+                app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ctContraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Ingresar contraseña"
+                    android:textColorHint="@color/letra_negra"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/letra_negra"
+                    android:theme="@style/EditText"
+                    android:drawableLeft="@drawable/ic_action_passblack"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/entradaRepetirContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="8dp"
+                android:padding="1dp"
+                android:hint=" Repetir contraseña"
+                app:errorTextAppearance="@style/EditTextError"
+                app:hintTextAppearance="@style/AppTheme.FloatingLabel"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ctRepetirContraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Repetir contraseña"
+                    android:textColorHint="@color/letra_negra"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/letra_negra"
+                    android:theme="@style/EditText"
+                    android:drawableLeft="@drawable/ic_action_passblack"
+                    />
+                <!-- android:drawableLeft="@drawable/car" -->
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout><!-- fin contenedor blanco  -->
+
+        <Button
+            android:id="@+id/btcambiarContraseñaForm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/fondo_inicio"
+            android:textColor="@color/letra_negra"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Actualizar contraseña"
+
+            />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -17,7 +17,7 @@ public interface UsuarioDAO {
     public long agregarUsuario(Usuario item );
 
     @Update
-    public int actualizarUsuario(Usuario item   );
+    public long actualizarUsuario(Usuario item   );
 
     @Delete
     public void eliminarUsuario(Usuario item );
@@ -33,4 +33,7 @@ public interface UsuarioDAO {
 
     @Query("SELECT * FROM Usuario WHERE Correo==:correo AND Contrasena==:contrasena")
     public Usuario iniciarSesion(String correo, String contrasena );
+
+    @Query("SELECT * FROM Usuario WHERE Activo==:estado")
+    public List<Usuario> obtenerSesion( int estado );
 }

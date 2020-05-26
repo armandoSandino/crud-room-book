@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
                 allowMainThreadQueries().
                 build();
         //obtiene y establece una lista de contactos
+        lista = new ArrayList<>();
         lista.addAll( db.obtenerLibroDAO().listaLibro() );
         agregarDatoReclicador();
         if ( lista.size() <= 0 )
@@ -79,6 +80,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void onItemClick( boolean b, Libro libro,  int position) {
+        /*
                             Intent intent = new Intent(  getContext() , EditarLibro.class);
                             intent.putExtra("idLibro",String.valueOf(libro.getId() ) );
                             intent.putExtra("idUsuario", 1 );
@@ -88,7 +90,7 @@ public class HomeFragment extends Fragment {
                             lista.removeAll( lista );
                             lista.clear();
                             lista.addAll( db.obtenerLibroDAO().listaLibro() );
-                            agregarDatoReclicador();
+                            agregarDatoReclicador();*/
     }
     private  void agregarDatoReclicador() {
         adaptador = new LibroRecyclerViewAdapter(  getContext() , lista, HomeFragment.this  );

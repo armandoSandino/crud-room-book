@@ -1,5 +1,7 @@
 package com.pineda.bibliotecaon;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -16,6 +18,7 @@ import com.pineda.bibliotecaon.DB.AppDatabase;
 import com.pineda.bibliotecaon.ETC.Util;
 import com.pineda.bibliotecaon.Entity.Usuario;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -63,14 +66,15 @@ public class Principal extends AppCompatActivity implements
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab = findViewById(R.id.fab);
+        /*fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+               //Navigation.findNavController( view ).navigate(R.id.navRegistrarLibro);
             }
-        });
+        });*/
         cargarNavigationView();
     }
     private void cargarNavigationView() {
@@ -100,16 +104,6 @@ public class Principal extends AppCompatActivity implements
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment );
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
-            /*
-                        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.navBuscarLibro, R.id.navRegistrarLibro, R.id.navcambiarContrasena)
-                    .setDrawerLayout(drawer)
-                    .build();
-
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-            NavigationUI.setupWithNavController(navigationView, navController);
-            * */
         }
     }
     @Override
@@ -128,12 +122,11 @@ public class Principal extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.navCerrarSesion:
-                this.finish();
-                // You can handle other cases Here.
-            default:
-                return  super.onOptionsItemSelected(item);
+            case R.id.action_salir:
+                this.finish();break;
+            default: break;
         }
+        return  super.onOptionsItemSelected(item);
     }
     private void obtenerInformacionUsuario() {
         Intent in  = getIntent();
@@ -145,11 +138,41 @@ public class Principal extends AppCompatActivity implements
     }
 
     public void mostrarAcerca(MenuItem item){
-        if ( item.getItemId() == R.id.navAcerca ) {
-            Toast.makeText(this, "la biblioteca", Toast.LENGTH_SHORT).show();
-        }else if(item.getItemId() ==R.id.navCerrarSesion ) {
-            finish();
+       /*if ( item.getItemId() == R.id.navAcerca ) {
+            onCreateDialogMensaje(345,
+                    "La biblioteca gestiona información de los libros actualmente disponibles.")
+                    .show();
+        }*/
+        if(item.getItemId() ==R.id.navCerrarSesion ) {
+            usuario.setActivo( 0 );
+            db.obtenerUsuarioDAO().actualizarUsuario( usuario );
+            this.finish();
         }
+    }
+    // llamar con :  onCreateDialog(4).show();
+    private Dialog onCreateDialogMensaje(int code, String contenido ) {
+        Dialog dialogBuilder = null;
+        AlertDialog.Builder builder = new AlertDialog.Builder(  this  );
+        //builder = builder.setTitle("Biblioteca");
+        builder = builder.setIcon(R.drawable.libro520px);
+        //error de conexion
+        if(code == 0){
+            builder = builder.setTitle("No tienes conexion a internet");
+            builder = builder.setMessage(contenido);
+        }else if(code == -1 ){// mensaje de error
+            builder = builder.setMessage(contenido);
+        }else{ // mensaje de notificacion
+            builder = builder.setTitle("Notificación ");
+            builder = builder.setMessage(contenido);
+        }
+        builder.setPositiveButton("ENTIENDO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialogBuilder = builder.create();
+        return dialogBuilder;
     }
     //ciclo de vida
     //cuando de clic en regresar

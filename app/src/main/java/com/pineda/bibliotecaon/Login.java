@@ -86,7 +86,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 startActivity( intent );
             }
         } else {
-            onCreateDialogMensaje(345,"Credenciales incorrectas").show();
+            //onCreateDialogMensaje(345,"Credenciales incorrectas").show();
+            Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
         }
     }
     private void agregarCuentaAdministrador() {
@@ -95,8 +96,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             user = new  Usuario(0, 1 ,"administrador","pineda","admin@biblioteca.com","123456",
                     0);
             long res = db.obtenerUsuarioDAO().agregarUsuario( user );
-        } else
-            Toast.makeText(this, "el usuario ya existe", Toast.LENGTH_SHORT).show();
+        }
     }
     //inserta todos los roles disponibles en la app
     private void agregarRol() {

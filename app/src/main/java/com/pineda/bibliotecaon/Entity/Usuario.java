@@ -29,31 +29,31 @@ public class Usuario {
 
     @ColumnInfo(name = "Apellido")
     @NonNull
-    private String Apellido;
+    private String apellido;
 
     @ColumnInfo(name = "Correo")
     @NonNull
-    private  String Correo;
+    private  String correo;
 
     @ColumnInfo(name = "Contrasena")
     @NonNull
-    private String Contraseña;
+    private String contrasena;
     @ColumnInfo(name = "Activo")
     @NonNull
-    private int Activo;
+    private int activo;
 
     @Ignore
     public Usuario (){
     }
-    public Usuario(int idUsuario, int idRol, @NonNull String nombre, @NonNull String apellido
-                  , @NonNull String correo, @NonNull String contraseña, int activo) {
+    public Usuario(int idUsuario, int idRol,  String nombre,  String apellido
+                  ,  String correo,  String contraseña, int activo) {
         this.idUsuario = idUsuario;
         this.idRol = idRol;
         this.nombre = nombre;
-        Apellido = apellido;
-        Correo = correo;
-        Contraseña = contraseña;
-        Activo = activo;
+        this.apellido = apellido;
+        this.correo  = correo;
+        this.contrasena = contraseña;
+        this.activo  = activo;
     }
 
     public Usuario( String nombre) {
@@ -74,45 +74,43 @@ public class Usuario {
     public void setIdRol(int idRol) {
         this.idRol = idRol;
     }
-    @NonNull
+
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(@NonNull String nombre) {
+    public void setNombre( String nombre) {
         this.nombre = nombre;
     }
-    @NonNull
+
     public String getApellido() {
-        return Apellido;
+        return this.apellido;
     }
 
-    public void setApellido(@NonNull String apellido) {
-        Apellido = apellido;
+    public void setApellido( String apellido) {
+        this.apellido = apellido;
     }
 
-    @NonNull
     public String getCorreo() {
-        return Correo;
+        return this.correo;
     }
 
-    public void setCorreo(@NonNull String correo) {
-        Correo = correo;
+    public void setCorreo( String correo) {
+         this.correo = correo;
     }
-    @NonNull
     public String getContraseña() {
-        return Contraseña;
+        return this.contrasena;
     }
 
-    public void setContraseña(@NonNull String contraseña) {
-        Contraseña = contraseña;
+    public void setContraseña( String contraseña) {
+        this.contrasena = contraseña;
     }
 
     public int getActivo() {
-        return Activo;
+        return this.activo;
     }
 
     public void setActivo(int activo) {
-        Activo = activo;
+         this.activo = activo;
     }
 }

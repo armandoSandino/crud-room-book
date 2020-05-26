@@ -34,7 +34,11 @@
         android:id="@+id/navRegistrarLibro"
         android:name="com.pineda.bibliotecaon.RegistrarLibro"
         android:label="Registrar libro"
-        tools:layout="@layout/fragment_registrar_libro" />
+        tools:layout="@layout/fragment_registrar_libro" >
+        <action
+            android:id="@+id/action_navRegistrarLibro_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
         android:id="@+id/navBuscarLibro"
         android:name="com.pineda.bibliotecaon.FragmentoBuscar"
