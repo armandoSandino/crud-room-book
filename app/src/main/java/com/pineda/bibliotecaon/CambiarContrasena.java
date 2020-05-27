@@ -44,6 +44,7 @@ public class CambiarContrasena extends Fragment {
 
     @BindView(R.id.entradaRepetirContraseña)
     TextInputLayout entradaRepetirContraseña;
+
     @BindView(R.id.ctRepetirContraseña)
     TextInputEditText ctRepetirContraseña;
 
@@ -55,6 +56,7 @@ public class CambiarContrasena extends Fragment {
 
     @BindView(R.id.btcambiarContraseñaForm)
     Button btcambiarContraseñaForm;
+
     AppDatabase db;
 
     public CambiarContrasena() {
@@ -65,66 +67,63 @@ public class CambiarContrasena extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cambiar_contrasena, container, false);
+        View vista = inflater.inflate(R.layout.fragment_cambiar_contrasena, container, false);
+        ButterKnife.bind( this, vista );
+        db = AppDatabase.obtenerBaseDeDato( getContext() );
+        btcambiarContraseñaForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actualizarContraseña( v );
+            }
+        });
+        bindListenerCajas( );
 
+        return vista;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind( this, view );
-        db = Room.
-                databaseBuilder(getContext(), AppDatabase.class, Util.nombreDb ).
-                allowMainThreadQueries().
-                build();
-        btcambiarContraseñaForm.setOnClickListener(new View.OnClickListener() {
+    }
+    private void actualizarContraseña( View v ) {
+        Snackbar.make( v , "Esta seguro?", Snackbar.LENGTH_LONG).setAction("SI", new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Snackbar.make( v , "Esta seguro?", Snackbar.LENGTH_LONG).setAction("SI", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View vis) {
-                        btcambiarContraseñaForm.setEnabled( false );
-                        if( validarDato() ){
-                            List<Usuario> lista = db.obtenerUsuarioDAO().obtenerSesion( 1 );
-                            if (  lista != null && lista.size() > 0 ) {
-                                Usuario user = lista.get(0);
-                                user.setContraseña( ctRepetirContraseña.getText().toString().trim() );
-                                long res = db.obtenerUsuarioDAO().actualizarUsuario( user );
+            public void onClick(View vis) {
+                btcambiarContraseñaForm.setEnabled( false );
+                if( validarDato() ){
+                    Usuario user = db.obtenerUsuarioDAO().obtenerSesion( 1 );
+                    if (  user != null) {
 
-                                if ( res > 0 ){
-                                    Date c = (Date) Calendar.getInstance().getTime();
-                                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                                    String  formattedDate = df.format(c);
-                                    HistorialContrasenaUsuario  his = new
-                                            HistorialContrasenaUsuario( 0 , user.getIdUsuario(),
-                                            user.getContraseña(),
-                                            formattedDate
-                                            );
-                                    long respuesta = db.obtenerHistorialContrasenaUsuarioDAO().
-                                            agregarHistorialContrasenaUsuario( his );
-                                    if ( respuesta > 0 ) {
-                                        limpiarCajas();
-                                        onCreateDialogMensaje(420, "Contraseña actualizada..").
-                                                show();
-                                    } else {
-                                        onCreateDialogMensaje(420, "Intentelo nuevamente.\n").
-                                                show();
-                                    }
-                                } else {
-                                    onCreateDialogMensaje(420 , "Algo no salió bien inténtelo nuevamente.")
-                                            .show();
-                                }
-                            }
-                        }else{
-                            onCreateDialogMensaje( 420 ,"\n" +
-                                    "Vuelva a intentarlo más tarde\n.").show();
-                            Snackbar.make(vis ,"Verifique la información proporcionada ", Snackbar.LENGTH_LONG).show();
+                        user.setContrasena( ctRepetirContraseña.getText().toString().trim() );
+                        db.obtenerUsuarioDAO().updateUsuario( user );
+
+                        Date c = (Date) Calendar.getInstance().getTime();
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        String  formattedDate = df.format(c);
+                        HistorialContrasenaUsuario  his = new
+                                HistorialContrasenaUsuario( 0 , user.getIdUsuario(),
+                                user.getContrasena(),
+                                formattedDate
+                        );
+                        long respuesta = db.obtenerHistorialContrasenaUsuarioDAO().
+                                agregarHistorialContrasenaUsuario( his );
+                        if ( respuesta > 0 ) {
+                            limpiarCajas();
+                            onCreateDialogMensaje(420, "Contraseña actualizada..").
+                                    show();
+                        } else {
+                            onCreateDialogMensaje(420, "Intentelo nuevamente.\n").
+                                    show();
                         }
-                        btcambiarContraseñaForm.setEnabled(true);
+
                     }
-                }).show();
+                }else{
+                    onCreateDialogMensaje( 420 ,"\n" +
+                            "Vuelva a intentarlo más tarde\n.").show();
+                    Snackbar.make(vis ,"Verifique la información proporcionada ", Snackbar.LENGTH_LONG).show();
+                }
+                btcambiarContraseñaForm.setEnabled(true);
             }
-        });
-        bindListenerCajas( );
+        }).show();
     }
 
     //validamos la informacion
@@ -233,6 +232,5 @@ public class CambiarContrasena extends Fragment {
         ctRepetirContraseña.setText("");
         setMessageTextInputLayoutError( entradaContraseña, null );
         setMessageTextInputLayoutError( entradaRepetirContraseña, null );
-
     }
 }

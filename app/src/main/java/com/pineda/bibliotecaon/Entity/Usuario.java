@@ -15,9 +15,8 @@ import androidx.room.PrimaryKey;
 public class Usuario {
     //Cada entidad necesita una clave primaria. Para mantener las cosas simples, cada palabra actúa como su propia clave principal.
     @PrimaryKey( autoGenerate = true )
-    @NonNull
     @ColumnInfo(name ="IdUsuario")//Especifique el nombre de la columna en la tabla si desea que sea diferente del nombre de la variable miembro.
-    private int idUsuario;
+    private long idUsuario;
 
     @ColumnInfo( name= "IdRol")
     @NonNull
@@ -38,6 +37,7 @@ public class Usuario {
     @ColumnInfo(name = "Contrasena")
     @NonNull
     private String contrasena;
+
     @ColumnInfo(name = "Activo")
     @NonNull
     private int activo;
@@ -60,11 +60,11 @@ public class Usuario {
         this.nombre = nombre;
     }
     //Cada campo que se almacena en la base de datos debe ser público o tener un método "getter".
-    public int getIdUsuario() {
+    public long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario( long idUsuario) {
         this.idUsuario = idUsuario;
     }
     public int getIdRol() {
@@ -74,7 +74,7 @@ public class Usuario {
     public void setIdRol(int idRol) {
         this.idRol = idRol;
     }
-
+    @NonNull
     public String getNombre() {
         return nombre;
     }
@@ -83,6 +83,7 @@ public class Usuario {
         this.nombre = nombre;
     }
 
+    @NonNull
     public String getApellido() {
         return this.apellido;
     }
@@ -98,12 +99,14 @@ public class Usuario {
     public void setCorreo( String correo) {
          this.correo = correo;
     }
-    public String getContraseña() {
-        return this.contrasena;
+
+    @NonNull
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña( String contraseña) {
-        this.contrasena = contraseña;
+    public void setContrasena( String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public int getActivo() {

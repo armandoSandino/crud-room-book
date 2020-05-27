@@ -1,13 +1,16 @@
 package com.pineda.bibliotecaon;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,8 +24,13 @@ import com.pineda.bibliotecaon.DB.AppDatabase;
 import com.pineda.bibliotecaon.ETC.Util;
 import com.pineda.bibliotecaon.Entity.Rol;
 import com.pineda.bibliotecaon.Entity.Usuario;
+import com.pineda.bibliotecaon.HILO.HiloSesion;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +47,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.ctPasswordLogin)
     TextInputEditText ctPasswordLogin;
 
-
     private AppDatabase db;
 
     @Override
@@ -47,9 +54,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind( this );
-        db = Room.databaseBuilder( getApplicationContext() ,AppDatabase.class, Util.nombreDb).
-                allowMainThreadQueries()
-                .build();
+        db = AppDatabase
+                .obtenerBaseDeDato( this );
         agregarRol();
         agregarCuentaAdministrador();
 
@@ -72,26 +78,28 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
     private void iniciarSesion() {
-        Usuario dato = db.obtenerUsuarioDAO().iniciarSesion(
+        Usuario dato = db
+                .obtenerUsuarioDAO().iniciarSesion(
                 ctUsuarioLogin.getText().toString().trim().toLowerCase(),
                 ctPasswordLogin.getText().toString().trim()
         );
         if ( dato != null ) {
             dato.setActivo(1);
-            int res = db.obtenerUsuarioDAO().actualizarUsuario( dato );
-            if ( res > 0 ) {
-                Intent intent = new Intent(  getApplicationContext() , Principal.class);
-                intent.putExtra("idUsuario", dato.getIdUsuario() );
+            db.obtenerUsuarioDAO().updateUsuario( dato );
+            guardarCredencial(ctUsuarioLogin.getText().toString().trim(),
+                    ctPasswordLogin.getText().toString().trim() );
+            Intent intent = new Intent(  getApplicationContext() , Principal.class);
+                intent.putExtra("idUsuario", String.valueOf(dato.getIdUsuario()) );
                 intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity( intent );
-            }
+
         } else {
-            //onCreateDialogMensaje(345,"Credenciales incorrectas").show();
             Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
         }
     }
     private void agregarCuentaAdministrador() {
-        Usuario user = db.obtenerUsuarioDAO().verificarCuenta("admin@biblioteca.com");
+        Usuario user = db
+                .obtenerUsuarioDAO().verificarCuenta("admin@biblioteca.com");
         if (  user == null ) {
             user = new  Usuario(0, 1 ,"administrador","pineda","admin@biblioteca.com","123456",
                     0);
@@ -100,7 +108,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
     //inserta todos los roles disponibles en la app
     private void agregarRol() {
-        List<Rol> lista = db.obtenerRolDAO().listaRol();
+        List<Rol> lista = AppDatabase.obtenerBaseDeDato( this )
+                .obtenerRolDAO().listaRol();
         if ( lista == null ){
             int con = 0;
             while( con >= 2 ) {
@@ -202,11 +211,35 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         return dialogBuilder;
     }
 
-    //ciclo de vida
-    //cuando de clic en regresar
+    public void guardarCredencial(String user, String pass) {
+        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("usuario", user);
+        editor.putString("password", pass);
+        editor.apply();
+        //editor.commit(); // creo que hace los mismo que apply
+    }
+
     @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
+    protected void onStart() {
+        super.onStart();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+    @Override
+    protected void onDestroy() {
+        AppDatabase.destroyInstance();
+        super.onDestroy();
     }
 
 }

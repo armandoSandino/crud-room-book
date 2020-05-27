@@ -5,34 +5,22 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pineda.bibliotecaon.ADAPTER.ContactsAdapter;
-import com.pineda.bibliotecaon.DB.ContactAppDatabase;
 import com.pineda.bibliotecaon.Entity.ContactRoom;
 
 import java.util.ArrayList;
 
-import android.content.DialogInterface;
-import android.os.AsyncTask;
-import android.os.Bundle;
-
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 //import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
-    private ContactAppDatabase contactAppDatabase;
+    //private ContactAppDatabase contactAppDatabase;
     private ContactsAdapter contactsAdapter;
     private ArrayList<ContactRoom> lista = new ArrayList<ContactRoom>();
     private RecyclerView recyclerView;
@@ -48,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(" Contacts Manager ");
 
         recyclerView = findViewById(R.id.recycler_view_contacts);
-        contactAppDatabase = Room.
+        /**contactAppDatabase = Room.
                 databaseBuilder(getApplicationContext(), ContactAppDatabase.class,"ContactDB").
                 allowMainThreadQueries().
                 build();
         //obtiene y establece una lista de contactos
-        lista.addAll( contactAppDatabase.getContactDAO().getContacts() );
+        lista.addAll( contactAppDatabase.getContactDAO().getContacts() );*/
 
 
 

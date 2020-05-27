@@ -96,10 +96,10 @@ public class FragmentoBuscar extends Fragment {
                 lbSubTituloBuscarLibro.setText( s );
             }
         });
-        db = Room.
-                databaseBuilder(getContext(), AppDatabase.class, Util.nombreDb ).
-                allowMainThreadQueries().
-                build();
+        db = Room.databaseBuilder( getContext()  ,AppDatabase.class, Util.nombreDb).
+                allowMainThreadQueries()
+                .build();
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,11 +203,16 @@ public class FragmentoBuscar extends Fragment {
                     intent.putExtra("idLibro",String.valueOf(libro.getId() ) );
                     intent.putExtra("idUsuario", 1 );
                     startActivity( intent );
-                    refrescarListaResultado();
+                    //refrescarListaResultado();
+                    Libro datoLibro = db.obtenerLibroDAO().obtenerLibro( libro.getId() );
+                    lista.set( position , datoLibro );
+                    adaptador.notifyItemChanged( position );
                 }else if( opciones[indice].equals("Eliminar") ) {
                     if ( db.obtenerLibroDAO().eliminarLibro( libro ) > 0 ){
                         onCreateDialogMensaje(235,"libro borrado").show();
-                        refrescarListaResultado();
+                        //refrescarListaResultado();
+                        lista.remove( position );
+                        adaptador.notifyItemRemoved( position );
                     }
                     else
                             onCreateDialogMensaje(-1,"libro no borrado...").show();
@@ -217,18 +222,6 @@ public class FragmentoBuscar extends Fragment {
             }
         });
         dialogoOpcion.show();
-    }
-   void  refrescarListaResultado() {
-       Libro libro  = db.obtenerLibroDAO().buscarLibro(
-               ctTerminoBuscarLibro.getText().toString().trim(),
-               ctTerminoBuscarLibro.getText().toString().trim()
-       );
-       lista = new ArrayList<>();
-
-       if ( libro != null )
-       lista.add( libro );
-
-       agregarDatoReclicador( lista );
     }
     private void buscarLibro( View v ) {
         if( validarDato() ){

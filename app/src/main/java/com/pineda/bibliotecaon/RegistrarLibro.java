@@ -23,38 +23,17 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.pineda.bibliotecaon.DB.AppDatabase;
-import com.pineda.bibliotecaon.DB.ContactAppDatabase;
 import com.pineda.bibliotecaon.ETC.Util;
 import com.pineda.bibliotecaon.Entity.Libro;
 import com.pineda.bibliotecaon.ViewModel.RegistrarLibroViewModel;
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.widget.Toast;
 
 import butterknife.BindView;

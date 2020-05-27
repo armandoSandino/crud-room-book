@@ -11,10 +11,10 @@ public class HistorialContrasenaUsuario {
     @ColumnInfo(name = "IdHistorialContrasenaUsuario")
     @NonNull
     @PrimaryKey( autoGenerate = true)
-    private int idHistorialContrasenaUsuario;
+    private long idHistorialContrasenaUsuario;
     @ColumnInfo(name = "IdUsuario")
     @NonNull
-    private int idUsuario;
+    private long idUsuario;
     @ColumnInfo(name = "Contrasena")
     @NonNull
     private String contrasena;
@@ -22,7 +22,7 @@ public class HistorialContrasenaUsuario {
     @NonNull
     private String fechaCreacion;
 
-    public HistorialContrasenaUsuario(int idHistorialContrasenaUsuario, int idUsuario, @NonNull String contrasena, @NonNull String fechaCreacion) {
+    public HistorialContrasenaUsuario(long idHistorialContrasenaUsuario, long idUsuario, @NonNull String contrasena, @NonNull String fechaCreacion) {
         this.idHistorialContrasenaUsuario = idHistorialContrasenaUsuario;
         this.idUsuario = idUsuario;
         this.contrasena = contrasena;
@@ -33,19 +33,19 @@ public class HistorialContrasenaUsuario {
     public HistorialContrasenaUsuario(){
     }
 
-    public int getIdHistorialContrasenaUsuario() {
+    public long getIdHistorialContrasenaUsuario() {
         return idHistorialContrasenaUsuario;
     }
 
-    public void setIdHistorialContrasenaUsuario(int idHistorialContrasenaUsuario) {
+    public void setIdHistorialContrasenaUsuario(long idHistorialContrasenaUsuario) {
         this.idHistorialContrasenaUsuario = idHistorialContrasenaUsuario;
     }
 
-    public int getIdUsuario() {
+    public long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(long idUsuario) {
         this.idUsuario = idUsuario;
     }
 

@@ -3,6 +3,7 @@ package com.pineda.bibliotecaon.DAO;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -16,9 +17,8 @@ public interface UsuarioDAO {
     @Insert
     public long agregarUsuario(Usuario item );
 
-    @Update
-    public long actualizarUsuario(Usuario item   );
-
+    @Update( onConflict = OnConflictStrategy.REPLACE )
+    public void updateUsuario( Usuario user);
     @Delete
     public void eliminarUsuario(Usuario item );
 
@@ -35,5 +35,5 @@ public interface UsuarioDAO {
     public Usuario iniciarSesion(String correo, String contrasena );
 
     @Query("SELECT * FROM Usuario WHERE Activo==:estado")
-    public List<Usuario> obtenerSesion( int estado );
+    public Usuario obtenerSesion( int estado );
 }

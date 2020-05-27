@@ -1,8 +1,10 @@
 package com.pineda.bibliotecaon;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.pineda.bibliotecaon.DB.AppDatabase;
 import com.pineda.bibliotecaon.ETC.Util;
 import com.pineda.bibliotecaon.Entity.Usuario;
+import com.pineda.bibliotecaon.HILO.HiloSesion;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
@@ -44,6 +47,7 @@ public class Principal extends AppCompatActivity implements
     private NavigationView navigationView;
     private Toolbar toolbar;
     private FloatingActionButton fab;
+    HiloSesion hiloSesion  = null;
 
     /*
     @BindView(R.id.navRegistrarLibro)
@@ -58,9 +62,7 @@ public class Principal extends AppCompatActivity implements
         setContentView(R.layout.activity_principal);
         /////
         ButterKnife.bind( this );
-        db = Room.databaseBuilder( this, AppDatabase.class, Util.nombreDb )
-                .allowMainThreadQueries()
-                .build();
+        db = AppDatabase.obtenerBaseDeDato( this );
         obtenerInformacionUsuario();
         //////
 
@@ -76,6 +78,10 @@ public class Principal extends AppCompatActivity implements
             }
         });*/
         cargarNavigationView();
+        //hilos
+        obtenerLista();
+        iniciarHilo();
+        //
     }
     private void cargarNavigationView() {
         drawer = findViewById(R.id.drawer_layout);
@@ -95,7 +101,7 @@ public class Principal extends AppCompatActivity implements
         // menu should be considered as top level destinations.
         if( true ) {
             mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home ,R.id.nav_galleryInvitado,
+                    R.id.nav_home ,
                     R.id.navRegistrarLibro, R.id.navBuscarLibro ,
                     R.id.navcambiarContrasena)
                     .setDrawerLayout(drawer)
@@ -122,16 +128,21 @@ public class Principal extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_salir:
-                this.finish();break;
+            case R.id.action_salir:{
+                Usuario user = db.obtenerUsuarioDAO().obtenerSesion( (int) usuario.getIdUsuario() );
+                user.setActivo( 0 );
+                db.obtenerUsuarioDAO().updateUsuario( user );
+                this.finish();
+            }break;
             default: break;
         }
         return  super.onOptionsItemSelected(item);
     }
     private void obtenerInformacionUsuario() {
         Intent in  = getIntent();
-        int res =  in.getIntExtra("idUsuario", 0);
-        usuario = db.obtenerUsuarioDAO().obtenerUsuario( res );
+        String res = in.getStringExtra("idUsuario" );
+        long id = (long)Integer.valueOf( res );
+        usuario = db.obtenerUsuarioDAO().obtenerUsuario( id );
     }
     @Override
     public void onClick(View v) {
@@ -144,8 +155,10 @@ public class Principal extends AppCompatActivity implements
                     .show();
         }*/
         if(item.getItemId() ==R.id.navCerrarSesion ) {
-            usuario.setActivo( 0 );
-            db.obtenerUsuarioDAO().actualizarUsuario( usuario );
+            Usuario user = db.obtenerUsuarioDAO().obtenerSesion( (int) usuario.getIdUsuario() );
+            user.setActivo( 0 );
+            db.obtenerUsuarioDAO().updateUsuario( user );
+            resetearCredenciale("","");
             this.finish();
         }
     }
@@ -174,11 +187,64 @@ public class Principal extends AppCompatActivity implements
         dialogBuilder = builder.create();
         return dialogBuilder;
     }
+    public void resetearCredenciale(String user, String pass) {
+        SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("usuario", user);
+        editor.putString("password", pass);
+        editor.apply();
+        //editor.commit(); // creo que hace los mismo que apply
+        //leer
+        //SharedPreferences preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        //if (!preferences.getString("password", "").trim().isEmpty()) { // si existen credenciales almacenadas
+        //}
+    }
+    private void obtenerLista(  ){
+        Thread hilo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(" estamos en el hilo obtener lista ");
+            }
+        });
+        hilo.start();
+    }
+    private void iniciarHilo() {
+        try {
+
+            if( hiloSesion == null) {
+                hiloSesion = new HiloSesion();
+                hiloSesion.start();
+            }
+            System.out.println("El hilo ubicado en Principal.java");
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            System.out.println("Error de tiempo :" + ex.getMessage());
+            System.err.println("Error : "+ ex.getStackTrace().toString() );
+            ex.printStackTrace();
+        }
+    }
+
     //ciclo de vida
     //cuando de clic en regresar
     @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
+    protected void onStart() {
+        super.onStart();
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+    @Override
+    protected void onDestroy() {
+        AppDatabase.destroyInstance();
+        super.onDestroy();
+    }
 }
